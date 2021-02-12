@@ -1,11 +1,9 @@
 import React from 'react';
 
-const CardDetails = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
 
-export default CardDetails;
+export const CardDetails: React.FC = () => {
+     
+    return (
+        <div></div>
+    );
+}

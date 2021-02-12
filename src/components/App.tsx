@@ -1,5 +1,7 @@
 import React,{ useEffect } from 'react';
 import { fetchData } from '../services/fetchData.service';
+import CardGrid from './cards/CardGrid';
+import Pagination from './pagination/Pagination';
 
 const App = () => {
 
@@ -8,9 +10,12 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      APP
-    </div>
+    <React.Fragment>
+      <CardGrid data={1} />
+      <Pagination
+          
+      />
+    </React.Fragment>
   );
 }
 

@@ -6,7 +6,7 @@ const fetchApiToken = async (): Promise<string>  => {
         const tokenUrl = "/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true";
         const response = await axios({
             url: tokenUrl,
-            method: 'post',
+            method: "POST",
             headers: {
                 "Accept": "*/*",
                 "Content-Type": "application/json"

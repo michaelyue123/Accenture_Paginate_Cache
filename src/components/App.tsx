@@ -1,6 +1,12 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
+import { fetchData } from '../services/fetchData.service';
 
-function App() {
+const App = () => {
+
+  useEffect(() => {
+    fetchData(10);
+  }, []);
+
   return (
     <div className="App">
       APP

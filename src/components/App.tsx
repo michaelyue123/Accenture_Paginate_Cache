@@ -1,21 +1,12 @@
-import React,{ useEffect } from 'react';
-import { fetchData } from '../services/fetchData.service';
-import CardGrid from './cards/CardGrid';
-import Pagination from './pagination/Pagination';
+import React from 'react';
 
-const App = () => {
+import Main from './main/Main';
 
-  useEffect(() => {
-    fetchData(10);
-  }, []);
 
+
+const App: React.FC = () => {
   return (
-    <React.Fragment>
-      <CardGrid data={1} />
-      <Pagination
-          
-      />
-    </React.Fragment>
+    <Main />
   );
 }
 

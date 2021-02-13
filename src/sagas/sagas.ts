@@ -1,10 +1,7 @@
 import { all } from "redux-saga/effects";
 
-
-function* getApiData() {
-    
-}
+function* getApiData() {}
 
 export default function* rootSaga() {
-    yield all([getApiData]);
+  yield all([getApiData]);
 }

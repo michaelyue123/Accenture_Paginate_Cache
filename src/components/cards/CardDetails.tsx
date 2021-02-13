@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
+interface CardDetailsProps {}
 
-export const CardDetails: React.FC = () => {
-     
-    return (
-        <div></div>
-    );
-}
+const CardDetails: React.FC<CardDetailsProps> = ({}) => {
+  return <div></div>;
+};
+
+export default CardDetails;

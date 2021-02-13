@@ -8,7 +8,7 @@ import rootSaga from "../sagas/sagas";
 
 const configureStore = () => {
   const store = createStore(rootReducer);
-  
+
   return store;
 };
 

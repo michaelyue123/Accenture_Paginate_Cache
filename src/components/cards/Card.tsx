@@ -1,10 +1,10 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
@@ -21,13 +21,17 @@ const useStyles = makeStyles({
 const SingleCard = (props: any) => {
   const classes = useStyles();
 
-  const { coreData } = props.data;
-  const { data } = props;
+  //   const { coreData } = props.data;
+  //   const { data } = props;
 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+        <Typography
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom
+        >
           New
         </Typography>
         <Typography variant="h5" component="h2">
@@ -48,6 +52,6 @@ const SingleCard = (props: any) => {
       </CardActions>
     </Card>
   );
-}
+};
 
 export default SingleCard;

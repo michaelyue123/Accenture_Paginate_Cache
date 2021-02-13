@@ -1,2 +1,1 @@
 # Accenture Paginate Cache
-

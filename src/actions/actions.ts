@@ -1,12 +1,15 @@
-import { type } from "os";
 import {
   BACK_PREVIOUS_PAGE,
   FETCH_DATA,
   MOVE_NEXT_PAGE,
-  UPDATE_CACHE_INDEX,
+  UPDATE_CACHED_PAGES,
   FetchDataAction,
-  UpdateCacheIndexAction,
   PaginateActionTypes,
+  UpdateCachedPagesAction,
+  ShowCardDetailsAction,
+  SHOW_CARD_DETAILS,
+  EmptyCardDetailsAction,
+  EMPTY_CARD_DETAILS,
 } from "../constants";
 
 // fetch data action
@@ -29,11 +32,20 @@ export const backPreviousPage = (): PaginateActionTypes => {
   };
 };
 
-export const updateNewIndexToCache = (
-  index: number
-): UpdateCacheIndexAction => {
+export const updateCachedPages = (): UpdateCachedPagesAction => {
   return {
-    type: UPDATE_CACHE_INDEX,
-    payload: index,
+    type: UPDATE_CACHED_PAGES,
+  };
+};
+
+export const ShowCardDetails = (): ShowCardDetailsAction => {
+  return {
+    type: SHOW_CARD_DETAILS,
+  };
+};
+
+export const EmptyCardDetails = (): EmptyCardDetailsAction => {
+  return {
+    type: EMPTY_CARD_DETAILS,
   };
 };

@@ -1,40 +1,49 @@
-// src/store/system/reducers.ts
-
 import {
   BACK_PREVIOUS_PAGE,
+  EmptyCardDetailsAction,
+  EMPTY_CARD_DETAILS,
   FetchDataAction,
   FETCH_DATA,
   INITIAL_CACHED_PAGES,
   MAX_CACHED_PAGES,
   MOVE_NEXT_PAGE,
   PaginateActionTypes,
-  UpdateCacheIndexAction,
-  UPDATE_CACHE_INDEX,
+  ShowCardDetailsAction,
+  SHOW_CARD_DETAILS,
+  UpdateCachedPagesAction,
+  UPDATE_CACHED_PAGES,
 } from "../constants";
 
 interface SystemState {
   currentPage: number;
   totalPage: number;
-  cachedPage: number;
+  totalFetchedPages: number;
+  cardDetails: {};
 }
 
 const initialState: SystemState = {
   currentPage: 0,
   totalPage: 0,
-  cachedPage: 0,
+  totalFetchedPages: 0,
+  cardDetails: {},
 };
 
 export const applicationReducer = (
   state = initialState,
-  action: FetchDataAction | PaginateActionTypes | UpdateCacheIndexAction
+  action:
+    | FetchDataAction
+    | PaginateActionTypes
+    | UpdateCachedPagesAction
+    | ShowCardDetailsAction
+    | EmptyCardDetailsAction
 ) => {
   switch (action.type) {
     case FETCH_DATA: {
       return {
         ...state,
         currentPage: 1,
-        totalPage: action.payload,
-        cachedPage: INITIAL_CACHED_PAGES,
+        totalPage: action,
+        totalFetchedPages: INITIAL_CACHED_PAGES + 1,
       };
     }
     case MOVE_NEXT_PAGE: {
@@ -49,10 +58,22 @@ export const applicationReducer = (
         currentPage: state.currentPage - 1,
       };
     }
-    case UPDATE_CACHE_INDEX: {
+    case UPDATE_CACHED_PAGES: {
       return {
         ...state,
-        cachedPage: state.cachedPage + MAX_CACHED_PAGES,
+        totalFetchedPages: state.totalFetchedPages + MAX_CACHED_PAGES,
+      };
+    }
+    case SHOW_CARD_DETAILS: {
+      return {
+        ...state,
+        cardDetails: action,
+      };
+    }
+    case EMPTY_CARD_DETAILS: {
+      return {
+        ...state,
+        cardDetails: {},
       };
     }
     default:

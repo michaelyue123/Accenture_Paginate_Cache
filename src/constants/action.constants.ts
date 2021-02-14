@@ -10,8 +10,14 @@ export const MOVE_NEXT_PAGE = "MOVE_NEXT_PAGE";
 // back to previous page constant type
 export const BACK_PREVIOUS_PAGE = "BACK_PREVIOUS_PAGE";
 
-// update cache index constant type
-export const UPDATE_CACHE_INDEX = "UPDATE_CACHE_INDEX";
+// update cache pages constant type
+export const UPDATE_CACHED_PAGES = "UPDATE_CACHED_PAGES";
+
+// show single card details
+export const SHOW_CARD_DETAILS = "SHOW_CARD_DETAILS";
+
+// empty card details after clicking close button
+export const EMPTY_CARD_DETAILS = "EMPTY_CARD_DETAILS";
 
 export interface FetchDataAction {
   type: typeof FETCH_DATA;
@@ -28,7 +34,14 @@ interface BackPreviousPageAction {
 
 export type PaginateActionTypes = MoveNextPageAction | BackPreviousPageAction;
 
-export interface UpdateCacheIndexAction {
-  type: typeof UPDATE_CACHE_INDEX;
-  payload: number;
+export interface UpdateCachedPagesAction {
+  type: typeof UPDATE_CACHED_PAGES;
+}
+
+export interface ShowCardDetailsAction {
+  type: typeof SHOW_CARD_DETAILS;
+}
+
+export interface EmptyCardDetailsAction {
+  type: typeof EMPTY_CARD_DETAILS;
 }

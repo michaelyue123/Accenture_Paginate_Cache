@@ -1,5 +1,5 @@
 // The number of cards displayed in each page
-export const CARD_NUM_PER_PAGE = 12;
+export const PAGE_SIZE = 12;
 
 // The max number of pages cached at one time
 export const MAX_CACHED_PAGES = 8;

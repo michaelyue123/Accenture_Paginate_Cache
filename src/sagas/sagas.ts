@@ -1,5 +1,5 @@
 import { all, call, put, select } from "redux-saga/effects";
-import { FETCH_DATA } from "../constants";
+import { FETCH_DATA, INITIAL_CACHED_PAGES, MAX_CACHED_PAGES, PAGE_SIZE, TOTAL_BACKEND_CARDS } from "../constants";
 import { fetchData } from "../services";
 
 function* getApiData() {
@@ -17,22 +17,33 @@ function* getApiData() {
     */
 
     const state: ReturnType<any> = yield select();
-    console.log(state);
+
+    if(state.data.currentPage===0) {
+      numbersToFetch = (INITIAL_CACHED_PAGES + 1) * PAGE_SIZE
+    }
+    else {
+      numbersToFetch = (state.data.totalFetchedPages + MAX_CACHED_PAGES) * PAGE_SIZE;
+    }
 
     // make API call to fetch data
-    const data = yield call(fetchData, numbersToFetch);
-    const totalPage = data
-
+    const { data, totalBackendCards } = yield call(fetchData, numbersToFetch);
+    
+    // udpate fetched data to redux store  
     yield put({
       type: FETCH_DATA,
-      payload: {
+      payload: data
+    })
 
-      }
-    });
-
-  } catch (error) {}
+    // update total number of backend cards to redux store
+    yield put({
+      type: TOTAL_BACKEND_CARDS,
+      payload: totalBackendCards
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default function* rootSaga() {
-  yield all([getApiData]);
+  yield all([getApiData()]);
 }

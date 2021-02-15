@@ -1,6 +1,9 @@
 // fetch data contant type
 export const FETCH_DATA = "FETCH_DATA";
 
+// get total number of cards available from backend
+export const TOTAL_BACKEND_CARDS = "TOTAL_BACKEND_CARDS";
+
 // request next page constant type
 export const REQUEST_NEXT_PAGE = "REQUEST_NEXT_PAGE";
 
@@ -22,6 +25,11 @@ export const EMPTY_CARD_DETAILS = "EMPTY_CARD_DETAILS";
 export interface FetchDataAction {
   type: typeof FETCH_DATA;
   payload: {};
+}
+
+export interface GetTotalCardsAction {
+  type: typeof TOTAL_BACKEND_CARDS;
+  payload: number;
 }
 
 interface MoveNextPageAction {

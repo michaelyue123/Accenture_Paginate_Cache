@@ -4,28 +4,31 @@ import {
   EMPTY_CARD_DETAILS,
   FetchDataAction,
   FETCH_DATA,
-  INITIAL_CACHED_PAGES,
+  GetTotalCardsAction,
   MAX_CACHED_PAGES,
   MOVE_NEXT_PAGE,
   PaginateActionTypes,
   ShowCardDetailsAction,
   SHOW_CARD_DETAILS,
+  TOTAL_BACKEND_CARDS,
   UpdateCachedPagesAction,
   UPDATE_CACHED_PAGES,
 } from "../constants";
 
 interface SystemState {
   currentPage: number;
-  totalPage: number;
+  totalBackendCards: number;
   totalFetchedPages: number;
   cardDetails: {};
+  fetchedData: []
 }
 
 const initialState: SystemState = {
   currentPage: 0,
-  totalPage: 0,
+  totalBackendCards: 0,
   totalFetchedPages: 0,
   cardDetails: {},
+  fetchedData: []
 };
 
 export const applicationReducer = (
@@ -36,15 +39,21 @@ export const applicationReducer = (
     | UpdateCachedPagesAction
     | ShowCardDetailsAction
     | EmptyCardDetailsAction
+    | GetTotalCardsAction
 ) => {
   switch (action.type) {
     case FETCH_DATA: {
       return {
         ...state,
         currentPage: 1,
-        totalPage: action,
-        totalFetchedPages: INITIAL_CACHED_PAGES + 1,
+        fetchedData: action.payload
       };
+    }
+    case TOTAL_BACKEND_CARDS: {
+      return {
+        ...state,
+        totalBackendCards: action.payload,
+      }
     }
     case MOVE_NEXT_PAGE: {
       return {

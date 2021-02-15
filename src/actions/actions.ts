@@ -10,13 +10,22 @@ import {
   SHOW_CARD_DETAILS,
   EmptyCardDetailsAction,
   EMPTY_CARD_DETAILS,
+  GetTotalCardsAction,
+  TOTAL_BACKEND_CARDS
 } from "../constants";
 
 // fetch data action
-export const fetchData = (data: {}): FetchDataAction => {
+export const fetchData = (data: []): FetchDataAction => {
   return {
     type: FETCH_DATA,
     payload: data,
+  };
+};
+
+export const getTotalCards = (totalBackendCards: number): GetTotalCardsAction => {
+  return {
+    type: TOTAL_BACKEND_CARDS,
+    payload: totalBackendCards,
   };
 };
 

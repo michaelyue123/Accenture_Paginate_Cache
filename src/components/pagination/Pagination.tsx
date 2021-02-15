@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({
   backPreviousPage,
   moveNextPage,
   currentPage,
-  backendPage,
+  // backendPage,
 }) => {
   const [spacing] = React.useState<number>(2);
   const classes = useStyles();
@@ -45,17 +45,17 @@ const Pagination: React.FC<PaginationProps> = ({
             <span data-test="page-display">
               Page{" "}
               <span data-test="currentPageIndex-display">{currentPage}</span> of{" "}
-              {backendPage}
+              {/* {backendPage} */}
             </span>
           </Grid>
 
-          {currentPage < backendPage && (
+          {/* {currentPage < backendPage && (
             <Grid item>
               <Button onClick={moveNextPage} data-test="next-button">
                 Next
               </Button>
             </Grid>
-          )}
+          )} */}
         </Grid>
       </Grid>
     </Grid>

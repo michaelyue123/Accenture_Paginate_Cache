@@ -34,8 +34,6 @@ function* getApiData() {
     // make API call to fetch data
     const { data, totalBackendCards } = yield call(fetchData, numbersToFetch);
 
-    console.log(totalBackendCards);
-
     // convert string to int
     const num = parseInt(totalBackendCards);
 

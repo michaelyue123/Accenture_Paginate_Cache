@@ -19,7 +19,6 @@ interface SystemState {
   currentPage: number;
   totalBackendCards: number;
   totalFetchedPages: number;
-  cardDetails: {};
   fetchedData: [];
 }
 
@@ -27,7 +26,6 @@ const initialState: SystemState = {
   currentPage: 0,
   totalBackendCards: 0,
   totalFetchedPages: 0,
-  cardDetails: {},
   fetchedData: [],
 };
 

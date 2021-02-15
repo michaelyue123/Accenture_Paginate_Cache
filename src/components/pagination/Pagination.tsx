@@ -31,7 +31,6 @@ const Pagination: React.FC<PaginationProps> = ({
 
   if (totalBackendCards) {
     backendPage = Math.ceil(totalBackendCards / 12);
-    console.log(backendPage);
   }
 
   return (

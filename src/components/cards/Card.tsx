@@ -9,20 +9,23 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    height: 230,
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  detail: {
+    fontSize: 14,
+    marginBottom: 5,
   },
 });
 
-const SingleCard = (props: any) => {
-  const classes = useStyles();
+interface SingleCardProp {
+  singleCardDetail: any;
+}
 
-  //   const { coreData } = props.data;
-  //   const { data } = props;
+const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
+  const classes = useStyles();
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -35,15 +38,16 @@ const SingleCard = (props: any) => {
           New
         </Typography>
         <Typography variant="h5" component="h2">
-          coreData number
+          {singleCardDetail.coreData.number}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Application: coreData.application
+        <Typography className={classes.detail} color="textSecondary">
+          Application: {singleCardDetail.coreData.application}
           <br />
-          Assignee: coreData.assignee
+          Assignee: {singleCardDetail.coreData.assignee}
         </Typography>
         <Typography variant="body2" component="p">
-          coreData.description coreData.shortDescription
+          {singleCardDetail.coreData.description}{" "}
+          {singleCardDetail.coreData.shortDescription}
         </Typography>
       </CardContent>
 

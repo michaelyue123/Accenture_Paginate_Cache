@@ -11,7 +11,7 @@ import {
   EmptyCardDetailsAction,
   EMPTY_CARD_DETAILS,
   GetTotalCardsAction,
-  TOTAL_BACKEND_CARDS
+  TOTAL_BACKEND_CARDS,
 } from "../constants";
 
 // fetch data action
@@ -22,7 +22,9 @@ export const fetchData = (data: []): FetchDataAction => {
   };
 };
 
-export const getTotalCards = (totalBackendCards: number): GetTotalCardsAction => {
+export const getTotalCards = (
+  totalBackendCards: number
+): GetTotalCardsAction => {
   return {
     type: TOTAL_BACKEND_CARDS,
     payload: totalBackendCards,

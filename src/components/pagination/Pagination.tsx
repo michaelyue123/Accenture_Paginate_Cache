@@ -17,22 +17,27 @@ interface PaginationProps {
   backPreviousPage?: () => void;
   moveNextPage?: () => void;
   currentPage: number;
-  lastpageIndex: number;
+  totalBackendCards: number;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   backPreviousPage,
   moveNextPage,
   currentPage,
-  // backendPage,
+  totalBackendCards,
 }) => {
-  const [spacing] = React.useState<number>(2);
   const classes = useStyles();
+  let backendPage: number = 0;
+
+  if (totalBackendCards) {
+    backendPage = Math.ceil(totalBackendCards / 12);
+    console.log(backendPage);
+  }
 
   return (
     <Grid container spacing={5} data-test="component-pagination">
       <Grid item xs={12}>
-        <Grid container justify="center">
+        <Grid container justify="center" spacing={2}>
           {currentPage > 1 && (
             <Grid item>
               <Button onClick={backPreviousPage} data-test="back-button">
@@ -45,17 +50,17 @@ const Pagination: React.FC<PaginationProps> = ({
             <span data-test="page-display">
               Page{" "}
               <span data-test="currentPageIndex-display">{currentPage}</span> of{" "}
-              {/* {backendPage} */}
+              {backendPage}
             </span>
           </Grid>
 
-          {/* {currentPage < backendPage && (
+          {backendPage && currentPage < backendPage && (
             <Grid item>
               <Button onClick={moveNextPage} data-test="next-button">
                 Next
               </Button>
             </Grid>
-          )} */}
+          )}
         </Grid>
       </Grid>
     </Grid>

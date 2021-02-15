@@ -20,7 +20,7 @@ interface SystemState {
   totalBackendCards: number;
   totalFetchedPages: number;
   cardDetails: {};
-  fetchedData: []
+  fetchedData: [];
 }
 
 const initialState: SystemState = {
@@ -28,7 +28,7 @@ const initialState: SystemState = {
   totalBackendCards: 0,
   totalFetchedPages: 0,
   cardDetails: {},
-  fetchedData: []
+  fetchedData: [],
 };
 
 export const applicationReducer = (
@@ -46,14 +46,14 @@ export const applicationReducer = (
       return {
         ...state,
         currentPage: 1,
-        fetchedData: action.payload
+        fetchedData: action.payload,
       };
     }
     case TOTAL_BACKEND_CARDS: {
       return {
         ...state,
         totalBackendCards: action.payload,
-      }
+      };
     }
     case MOVE_NEXT_PAGE: {
       return {

@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { v4 as uuidv4 } from "uuid";
 
 import SingleCard from "./Card";
 
@@ -10,24 +11,21 @@ const useStyles = makeStyles({
   },
 });
 
-// interface Props {
-//     data: number;
-// }
+interface CardGridProps {
+  singlePageData: any;
+}
 
-const CardGrid: React.FC = () => {
+const CardGrid: React.FC<CardGridProps> = ({ singlePageData }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        {/* {data.map((item: { coreData: { id: string | number | null | undefined; }; }) => (
-            <Grid item xs={12} sm={6} md={4} xl={3} key={item.coreData.id}>
-                <SingleCard data={item} />
-            </Grid>
-            ))} */}
-        <Grid item xs={12} sm={6} md={4} xl={3}>
-          <SingleCard />
-        </Grid>
+        {singlePageData.map((item: any) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
+            <SingleCard singleCardDetail={item} />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );

@@ -1,5 +1,11 @@
 import { all, call, put, select } from "redux-saga/effects";
-import { FETCH_DATA, INITIAL_CACHED_PAGES, MAX_CACHED_PAGES, PAGE_SIZE, TOTAL_BACKEND_CARDS } from "../constants";
+import {
+  FETCH_DATA,
+  INITIAL_CACHED_PAGES,
+  MAX_CACHED_PAGES,
+  PAGE_SIZE,
+  TOTAL_BACKEND_CARDS,
+} from "../constants";
 import { fetchData } from "../services";
 
 function* getApiData() {
@@ -18,27 +24,32 @@ function* getApiData() {
 
     const state: ReturnType<any> = yield select();
 
-    if(state.data.currentPage===0) {
-      numbersToFetch = (INITIAL_CACHED_PAGES + 1) * PAGE_SIZE
-    }
-    else {
-      numbersToFetch = (state.data.totalFetchedPages + MAX_CACHED_PAGES) * PAGE_SIZE;
+    if (state.data.currentPage === 0) {
+      numbersToFetch = (INITIAL_CACHED_PAGES + 1) * PAGE_SIZE;
+    } else {
+      numbersToFetch =
+        (state.data.totalFetchedPages + MAX_CACHED_PAGES) * PAGE_SIZE;
     }
 
     // make API call to fetch data
     const { data, totalBackendCards } = yield call(fetchData, numbersToFetch);
-    
-    // udpate fetched data to redux store  
+
+    console.log(totalBackendCards);
+
+    // convert string to int
+    const num = parseInt(totalBackendCards);
+
+    // udpate fetched data to redux store
     yield put({
       type: FETCH_DATA,
-      payload: data
-    })
+      payload: data,
+    });
 
     // update total number of backend cards to redux store
     yield put({
       type: TOTAL_BACKEND_CARDS,
-      payload: totalBackendCards
-    })
+      payload: num,
+    });
   } catch (error) {
     console.log(error);
   }

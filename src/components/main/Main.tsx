@@ -1,48 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { fetchData } from "../../services/fetchData.service";
+import { makeStyles } from "@material-ui/core/styles";
 
 import CardGrid from "../cards/CardGrid";
 import InitialLoading from "../loading/initial_loading/InitialLoading";
 import Pagination from "../pagination/Pagination";
+import { moveNextPage, backPreviousPage } from "../../actions";
+import { PAGE_SIZE } from "../../constants";
+import UncachedLoading from "../loading/uncached_loading/UncachedLoading";
 
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#DCDCDC",
+  },
+});
 
-interface IRootState {
-  data: []
-}
+const Main: React.FC = () => {
+  const data = useSelector((state: any) => state.data);
+  const classes = useStyles();
 
-const Main: React.FC = ({}) => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const totalBackendCards: number = data.totalBackendCards;
+  const currentPage: number = data.currentPage;
+  const fetchedData: [] = data.fetchedData;
+  let totalFetchedPage: number = 0;
 
-  const data = useSelector((state: IRootState) => state.data);
+  if (fetchedData) {
+    totalFetchedPage = fetchedData.length / PAGE_SIZE;
+  }
 
-  console.log(data);
-
-
-  // loading for 2s
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  // paginate fetched data to fit in one page
+  const paginate = (
+    data: typeof fetchedData,
+    currentPage: number,
+    pageSize: number
+  ) => {
+    let startIndex = (currentPage - 1) * pageSize;
+    let lastIndex = currentPage * pageSize;
+    return data.slice(startIndex, lastIndex);
+  };
 
   return (
-    <>
-      {loading ? (
-        <InitialLoading />
-      ) : (
+    <div className={classes.root}>
+      {fetchedData.length > (currentPage - 1) * PAGE_SIZE ? (
         <React.Fragment>
-          <CardGrid />
-          {/* <Pagination
-            lastpageIndex={lastPageIndex}
+          {currentPage === totalFetchedPage && <InitialLoading />}
+          <CardGrid
+            singlePageData={paginate(fetchedData, currentPage, PAGE_SIZE)}
+          />
+          <Pagination
+            totalBackendCards={totalBackendCards}
             currentPage={currentPage}
             moveNextPage={moveNextPage}
             backPreviousPage={backPreviousPage}
-          /> */}
+          />
         </React.Fragment>
+      ) : (
+        <UncachedLoading />
       )}
-    </>
+    </div>
   );
 };
 

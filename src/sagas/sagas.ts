@@ -1,4 +1,11 @@
-import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+  all,
+  call,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
 import {
   FETCH_DATA,
   FETCH_DATA_REQUESTED,
@@ -11,7 +18,6 @@ import {
   UPDATE_TOTAL_FETCHED_PAGES,
 } from "../constants";
 import { fetchData } from "../services";
-
 
 function* getApiDataAsync() {
   try {
@@ -32,11 +38,11 @@ function* getApiDataAsync() {
 
     const state: ReturnType<any> = yield select();
 
-    if (state.data.currentPage === 1) {
+    if (state.appData.currentPage === 1) {
       totalFetchedPages = INITIAL_CACHED_PAGES + 1;
       numbersToFetch = totalFetchedPages * PAGE_SIZE;
     } else {
-      totalFetchedPages = state.data.totalFetchedPages + MAX_CACHED_PAGES;
+      totalFetchedPages = state.appData.totalFetchedPages + MAX_CACHED_PAGES;
       numbersToFetch = totalFetchedPages * PAGE_SIZE;
     }
 
@@ -68,7 +74,7 @@ function* onNextPageAsync() {
 
   const state: ReturnType<any> = yield select();
 
-  const { currentPage, totalFetchedPages } = state.data;
+  const { currentPage, totalFetchedPages } = state.appData;
 
   // if current page that user visits equals the total number of fetched pages
   // then make api call to fetch more data and update total number of fetched pages

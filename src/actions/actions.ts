@@ -23,25 +23,27 @@ const fetchData = (data: []): FetchDataAction => {
 // fetch data request
 const fetchDataRequest = () => {
   return {
-    type: FETCH_DATA_REQUESTED
-  }
-}
+    type: FETCH_DATA_REQUESTED,
+  };
+};
 
 // get initial fetched page action
 // eslint-disable-next-line
 const getInitialFetchedPages = () => {
   return {
     type: GET_INITIAL_FETCHED_PAGES,
-  }
-}
+  };
+};
 
 // update total number of fetched pages action
-const updateTotalFetchedPages = (fetchedPages: number): UpdateTotalFetchedPagesAction => {
+const updateTotalFetchedPages = (
+  fetchedPages: number
+): UpdateTotalFetchedPagesAction => {
   return {
     type: UPDATE_TOTAL_FETCHED_PAGES,
-    payload: fetchedPages
-  }
-}
+    payload: fetchedPages,
+  };
+};
 
 // move to next page action
 const moveNextPage = (): PaginateActionTypes => {
@@ -71,5 +73,5 @@ export const applicationAction = {
   updateTotalFetchedPages,
   moveNextPage,
   backPreviousPage,
-  requestNextPage
+  requestNextPage,
 };

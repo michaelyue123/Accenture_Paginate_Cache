@@ -36,7 +36,6 @@ export const applicationReducer = (
     | PaginateActionTypes
     | UpdateTotalFetchedPagesAction
     | GetTotalCardsAction
-    
 ) => {
   switch (action.type) {
     case FETCH_DATA: {
@@ -55,7 +54,7 @@ export const applicationReducer = (
       return {
         ...state,
         totalFetchedPages: INITIAL_CACHED_PAGES + 1,
-      }
+      };
     }
     case UPDATE_TOTAL_FETCHED_PAGES: {
       return {

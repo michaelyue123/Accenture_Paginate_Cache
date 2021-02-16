@@ -12,20 +12,21 @@ const useStyles = makeStyles({
 });
 
 interface CardGridProps {
-  singlePageData: any;
+  singlePageData?: any;
 }
 
 const CardGrid: React.FC<CardGridProps> = ({ singlePageData }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-test="CardGrid-Display">
       <Grid container spacing={3}>
-        {singlePageData.map((item: any) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
-            <SingleCard singleCardDetail={item} />
-          </Grid>
-        ))}
+        {singlePageData &&
+          singlePageData.map((item: any) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
+              <SingleCard singleCardDetail={item} />
+            </Grid>
+          ))}
       </Grid>
     </div>
   );

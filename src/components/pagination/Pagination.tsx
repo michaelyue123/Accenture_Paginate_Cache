@@ -20,15 +20,15 @@ const useStyles = makeStyles((theme) => ({
 interface PaginationProps {
   currentPage: number;
   totalBackendCards: number;
-  moveNextPage: () => void;
-  backPreviousPage: () => void;
+  moveNextPage?: () => void;
+  backPreviousPage?: () => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalBackendCards,
   moveNextPage,
-  backPreviousPage
+  backPreviousPage,
 }) => {
   const classes = useStyles();
   let backendPage: number = 0;
@@ -54,9 +54,8 @@ const Pagination: React.FC<PaginationProps> = ({
           )}
 
           <Grid item className={classes.spanMargin}>
-            <span data-test="page-display">
-              Page{" "}
-              <span data-test="currentPageIndex-display">{currentPage}</span> of{" "}
+            <span>
+              Page <span data-test="currentPageIndex">{currentPage}</span> of{" "}
               {backendPage}
             </span>
           </Grid>

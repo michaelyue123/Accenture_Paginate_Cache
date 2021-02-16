@@ -17,13 +17,13 @@ const useStyles = makeStyles({
 
 const Main: React.FC = () => {
   // get fetched data from store
-  const data = useSelector((state: any) => state.data);
+  const data = useSelector((state: any) => state.appData);
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  // extract variables from data 
-  const {totalBackendCards, currentPage, fetchedData} = data;
+  // extract variables from data
+  const { totalBackendCards, currentPage, fetchedData } = data;
 
   // fire API call and watch API call
   useEffect(() => {
@@ -31,15 +31,15 @@ const Main: React.FC = () => {
       dispatch(applicationAction.fetchDataRequest());
     }
     requestData();
-  }, [dispatch])
+  }, [dispatch]);
 
   // update total fetched page
   useEffect(() => {
     dispatch(applicationAction.getInitialFetchedPages());
   }, [dispatch]);
 
-  // paginate fetched data 
-  // make one slice of total fetched data on every 12 cards 
+  // paginate fetched data
+  // make one slice of total fetched data on every 12 cards
   const paginate = (
     data: typeof fetchedData,
     currentPage: number,
@@ -62,13 +62,12 @@ const Main: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      {
-        fetchedData.length === 0 ? 
+      {fetchedData.length === 0 ? (
         <InitialLoading />
-        :
+      ) : (
         <>
-          {fetchedData.length > (currentPage-1) * PAGE_SIZE ? (
-            <React.Fragment>
+          {fetchedData.length > (currentPage - 1) * PAGE_SIZE ? (
+            <React.Fragment data-test="main-component-display">
               <CardGrid
                 singlePageData={paginate(fetchedData, currentPage, PAGE_SIZE)}
               />
@@ -83,7 +82,7 @@ const Main: React.FC = () => {
             <UncachedLoading />
           )}
         </>
-      }
+      )}
     </div>
   );
 };

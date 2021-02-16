@@ -10,10 +10,10 @@ export const FETCH_DATA_REQUESTED = "FETCH_DATA_REQUESTED";
 // get total number of cards available from backend
 export const TOTAL_BACKEND_CARDS = "TOTAL_BACKEND_CARDS";
 
-// update total fetched pages 
+// update total fetched pages
 export const UPDATE_TOTAL_FETCHED_PAGES = "UPDATE_TOTAL_FETCHED_PAGES";
 
-// constant for watching moving to next page request 
+// constant for watching moving to next page request
 export const NEXT_PAGE_REQUESTED = "NEXT_PAGE_REQUESTED";
 
 // move to next page constant type
@@ -22,7 +22,6 @@ export const MOVE_NEXT_PAGE = "MOVE_NEXT_PAGE";
 // back to previous page constant type
 export const BACK_PREVIOUS_PAGE = "BACK_PREVIOUS_PAGE";
 
-
 export interface FetchDataAction {
   type: typeof FETCH_DATA;
   payload: {};
@@ -30,12 +29,12 @@ export interface FetchDataAction {
 
 export interface GetInitialFetchedPagesAction {
   type: typeof GET_INITIAL_FETCHED_PAGES;
-  payload: number
+  payload: number;
 }
 
 export interface UpdateTotalFetchedPagesAction {
   type: typeof UPDATE_TOTAL_FETCHED_PAGES;
-  payload: number
+  payload: number;
 }
 
 export interface GetTotalCardsAction {
@@ -56,4 +55,3 @@ interface BackPreviousPageAction {
 }
 
 export type PaginateActionTypes = MoveNextPageAction | BackPreviousPageAction;
-

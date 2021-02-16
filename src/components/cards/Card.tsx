@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 5,
   },
   list: {
-    width: "35vw",
+    width: "28vw",
     margin: "10px",
   },
   closeButton: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface SingleCardProp {
-  singleCardDetail: any;
+  singleCardDetail?: any;
 }
 
 // create a type anchor to achieve drawer toggling
@@ -60,7 +60,7 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
     "approval",
   ];
 
-  // toggle drawer to show on the right hand side 
+  // toggle drawer to show on the right hand side
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
@@ -77,7 +77,13 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
   };
 
   const cardDrawer = (anchor: Anchor) => (
-    <Grid container spacing={2} className={classes.list} role="presentation">
+    <Grid
+      container
+      spacing={2}
+      className={classes.list}
+      role="presentation"
+      data-test="CardDrawer-Display"
+    >
       <IconButton
         aria-label="close"
         className={classes.closeButton}
@@ -85,20 +91,20 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
       >
         <CloseIcon />
       </IconButton>
-    
+
       <Grid item xs={12}>
         <Typography className={classes.ticketNumberSize}>
-          {singleCardDetail.coreData.number}
+          {singleCardDetail && singleCardDetail.coreData.number}
         </Typography>
       </Grid>
 
       {coreDataList.map((key) => (
         <React.Fragment key={key}>
           <Grid item xs={12} md={4} lg={3}>
-            <b>{key}</b>
+            <b>{key === "shortDescription" ? "short Description" : key}</b>
           </Grid>
           <Grid item xs={12} md={8} lg={9}>
-            {singleCardDetail.coreData[key] || "N/A"}
+            {(singleCardDetail && singleCardDetail.coreData[key]) || "N/A"}
             <Divider />
           </Grid>
         </React.Fragment>
@@ -110,7 +116,7 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
             <b>{data}</b>
           </Grid>
           <Grid item xs={12} md={8} lg={9}>
-            {singleCardDetail.serviceData[data] || "N/A"}
+            {(singleCardDetail && singleCardDetail.serviceData[data]) || "N/A"}
             <Divider />
           </Grid>
         </React.Fragment>
@@ -119,7 +125,11 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
   );
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card
+      className={classes.root}
+      variant="outlined"
+      data-test="CardSummary-Display"
+    >
       <CardContent>
         <Typography
           className={classes.title}
@@ -129,16 +139,18 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
           New
         </Typography>
         <Typography variant="h5" component="h2">
-          {singleCardDetail.coreData.number}
+          {singleCardDetail && singleCardDetail.coreData.number}
         </Typography>
         <Typography className={classes.detail} color="textSecondary">
-          Application: {singleCardDetail.coreData.application}
+          Application:{" "}
+          {singleCardDetail && singleCardDetail.coreData.application}
           <br />
-          Assignee: {singleCardDetail.coreData.assignee}
+          Assignee: {singleCardDetail && singleCardDetail.coreData.assignee}
         </Typography>
+        <br></br>
         <Typography variant="body2" component="p">
-          {singleCardDetail.coreData.description}{" "}
-          {singleCardDetail.coreData.shortDescription}
+          {singleCardDetail && singleCardDetail.coreData.description}{" "}
+          {singleCardDetail && singleCardDetail.coreData.shortDescription}
         </Typography>
       </CardContent>
 

@@ -76,6 +76,7 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
     setState({ ...state, [anchor]: open });
   };
 
+  // card drawer UI 
   const cardDrawer = (anchor: Anchor) => (
     <Grid
       container

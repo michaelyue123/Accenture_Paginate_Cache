@@ -1,32 +1,6 @@
 import axios from "axios";
 import { API_TOKEN } from "../constants";
 
-//fetch latest API token
-// const fetchApiToken = async (): Promise<any> => {
-//   try {
-//     const tokenUrl =
-//       "/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true";
-//     const response = fetch(tokenUrl, {
-//       method: 'POST',
-//       credentials: 'include',
-//       headers: {
-//           'Accept': 'text/html',
-//           "Content-Type": 'text/plain',
-//         },
-//       body: JSON.stringify({"username":"candidate_test1","password":"candidate_test1","snowEnabled":true})
-//   });
-
-//     const data = await response;
-//     console.log(data);
-//     return data;
-//   } catch (error) {
-//     if (error) {
-//       console.log(error);
-//     }
-//     throw error;
-//   }
-// };
-
 // fetch required data
 export const fetchData = async (numbersToFetch: number): Promise<{}> => {
   try {

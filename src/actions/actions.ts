@@ -28,6 +28,7 @@ const fetchDataRequest = () => {
 }
 
 // get initial fetched page action
+// eslint-disable-next-line
 const getInitialFetchedPages = () => {
   return {
     type: GET_INITIAL_FETCHED_PAGES,

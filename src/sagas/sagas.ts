@@ -80,7 +80,7 @@ function* onNextPageAsync() {
 }
 
 // Watch for firing API Call
-function* watchAPIRequest() {
+function* watchFetchDataRequest() {
   yield takeLatest(FETCH_DATA_REQUESTED, getApiDataAsync);
 }
 
@@ -90,5 +90,5 @@ function* watchOnNextPageAsync() {
 }
 
 export default function* rootSaga() {
-  yield all([watchAPIRequest(), watchOnNextPageAsync()]);
+  yield all([watchFetchDataRequest(), watchOnNextPageAsync()]);
 }

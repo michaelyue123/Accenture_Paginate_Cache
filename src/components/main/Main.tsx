@@ -16,15 +16,15 @@ const useStyles = makeStyles({
 });
 
 const Main: React.FC = () => {
+  // get fetched data from store
   const data = useSelector((state: any) => state.data);
   const classes = useStyles();
+
   const dispatch = useDispatch();
 
-  const totalBackendCards: number = data.totalBackendCards;
-  const currentPage: number = data.currentPage;
-  const fetchedData: [] = data.fetchedData;
+  // extract variables from data 
+  const {totalBackendCards, currentPage, fetchedData} = data;
 
-  
   // fire API call and watch API call
   useEffect(() => {
     function requestData() {

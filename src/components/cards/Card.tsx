@@ -3,11 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Divider, Grid, Drawer, IconButton } from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
   },
   ticketNumberSize: {
-    fontSize: "30px"
+    fontSize: "30px",
   },
   detail: {
     fontSize: 14,
@@ -26,42 +25,50 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     width: "35vw",
-    margin: "10px"
+    margin: "10px",
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
-  }
+  },
 }));
 
 interface SingleCardProp {
   singleCardDetail: any;
 }
 
-type Anchor = 'right';
+// create a type anchor to achieve drawer toggling
+type Anchor = "right";
 
 const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
   const classes = useStyles();
 
-  const [state, setState] = React.useState({right: false});
+  const [state, setState] = React.useState({ right: false });
 
-  // coreData Keys to display in the drawer
-  const coreDataKeys = ["assignee", "shortDescription", "application"];
+  // coreData name to display in the drawer
+  const coreDataList = ["assignee", "shortDescription", "application"];
 
-  // serviceData Keys to display in the drawer
-  const serviceDataKeys = ["made_sla","upon_reject","opened_by","priority","activity_due","approval"];
+  // serviceData name to display in the drawer
+  const serviceDataList = [
+    "made_sla",
+    "upon_reject",
+    "opened_by",
+    "priority",
+    "activity_due",
+    "approval",
+  ];
 
-
+  // toggle drawer to show on the right hand side 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
+    event: React.KeyboardEvent | React.MouseEvent
   ) => {
     if (
       event &&
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
     ) {
       return;
     }
@@ -70,24 +77,22 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
   };
 
   const cardDrawer = (anchor: Anchor) => (
-    <Grid
-      container
-      spacing={2}
-      className={classes.list}
-      role="presentation"
-    >
-      <IconButton aria-label="close" className={classes.closeButton} onClick={toggleDrawer(anchor, false)}>
+    <Grid container spacing={2} className={classes.list} role="presentation">
+      <IconButton
+        aria-label="close"
+        className={classes.closeButton}
+        onClick={toggleDrawer(anchor, false)}
+      >
         <CloseIcon />
       </IconButton>
-      {/* Card Number */}
+    
       <Grid item xs={12}>
         <Typography className={classes.ticketNumberSize}>
           {singleCardDetail.coreData.number}
         </Typography>
       </Grid>
 
-      {/* Core Data key and value */}
-      {coreDataKeys.map(key => (
+      {coreDataList.map((key) => (
         <React.Fragment key={key}>
           <Grid item xs={12} md={4} lg={3}>
             <b>{key}</b>
@@ -99,9 +104,7 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
         </React.Fragment>
       ))}
 
-
-      {/* Service Data key and value */}
-      {serviceDataKeys.map(data => (
+      {serviceDataList.map((data) => (
         <React.Fragment key={data}>
           <Grid item xs={12} md={4} lg={3}>
             <b>{data}</b>
@@ -140,13 +143,10 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
       </CardContent>
 
       <CardActions>
-        {(['right'] as Anchor[]).map((anchor) => (
+        {(["right"] as Anchor[]).map((anchor) => (
           <React.Fragment key={anchor}>
             <Button onClick={toggleDrawer(anchor, true)}>LEARN MORE</Button>
-            <Drawer
-              anchor={anchor}
-              open={state[anchor]}
-            >
+            <Drawer anchor={anchor} open={state[anchor]}>
               {cardDrawer(anchor)}
             </Drawer>
           </React.Fragment>

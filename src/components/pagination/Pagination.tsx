@@ -11,20 +11,24 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     marginTop: 5,
   },
+  buttonStyle: {
+    padding: "5px",
+    fontSize: 13,
+  },
 }));
 
 interface PaginationProps {
-  backPreviousPage?: () => void;
-  moveNextPage?: () => void;
   currentPage: number;
   totalBackendCards: number;
+  moveNextPage: () => void;
+  backPreviousPage: () => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
-  backPreviousPage,
-  moveNextPage,
   currentPage,
   totalBackendCards,
+  moveNextPage,
+  backPreviousPage
 }) => {
   const classes = useStyles();
   let backendPage: number = 0;
@@ -39,7 +43,11 @@ const Pagination: React.FC<PaginationProps> = ({
         <Grid container justify="center" spacing={2}>
           {currentPage > 1 && (
             <Grid item>
-              <Button onClick={backPreviousPage} data-test="back-button">
+              <Button
+                className={classes.buttonStyle}
+                onClick={backPreviousPage}
+                data-test="back-button"
+              >
                 Back
               </Button>
             </Grid>
@@ -53,9 +61,13 @@ const Pagination: React.FC<PaginationProps> = ({
             </span>
           </Grid>
 
-          {backendPage && currentPage < backendPage && (
+          {currentPage < backendPage && (
             <Grid item>
-              <Button onClick={moveNextPage} data-test="next-button">
+              <Button
+                className={classes.buttonStyle}
+                onClick={moveNextPage}
+                data-test="next-button"
+              >
                 Next
               </Button>
             </Grid>

@@ -1,18 +1,17 @@
 import {
   BACK_PREVIOUS_PAGE,
-  EmptyCardDetailsAction,
-  EMPTY_CARD_DETAILS,
   FetchDataAction,
   FETCH_DATA,
+  GetInitialFetchedPagesAction,
   GetTotalCardsAction,
+  GET_INITIAL_FETCHED_PAGES,
+  INITIAL_CACHED_PAGES,
   MAX_CACHED_PAGES,
   MOVE_NEXT_PAGE,
   PaginateActionTypes,
-  ShowCardDetailsAction,
-  SHOW_CARD_DETAILS,
   TOTAL_BACKEND_CARDS,
-  UpdateCachedPagesAction,
-  UPDATE_CACHED_PAGES,
+  UpdateTotalFetchedPagesAction,
+  UPDATE_TOTAL_FETCHED_PAGES,
 } from "../constants";
 
 interface SystemState {
@@ -23,7 +22,7 @@ interface SystemState {
 }
 
 const initialState: SystemState = {
-  currentPage: 0,
+  currentPage: 1,
   totalBackendCards: 0,
   totalFetchedPages: 0,
   fetchedData: [],
@@ -33,17 +32,16 @@ export const applicationReducer = (
   state = initialState,
   action:
     | FetchDataAction
+    | GetInitialFetchedPagesAction
     | PaginateActionTypes
-    | UpdateCachedPagesAction
-    | ShowCardDetailsAction
-    | EmptyCardDetailsAction
+    | UpdateTotalFetchedPagesAction
     | GetTotalCardsAction
+    
 ) => {
   switch (action.type) {
     case FETCH_DATA: {
       return {
         ...state,
-        currentPage: 1,
         fetchedData: action.payload,
       };
     }
@@ -51,6 +49,18 @@ export const applicationReducer = (
       return {
         ...state,
         totalBackendCards: action.payload,
+      };
+    }
+    case GET_INITIAL_FETCHED_PAGES: {
+      return {
+        ...state,
+        totalFetchedPages: INITIAL_CACHED_PAGES + 1,
+      }
+    }
+    case UPDATE_TOTAL_FETCHED_PAGES: {
+      return {
+        ...state,
+        totalFetchedPages: state.totalFetchedPages + MAX_CACHED_PAGES,
       };
     }
     case MOVE_NEXT_PAGE: {
@@ -63,24 +73,6 @@ export const applicationReducer = (
       return {
         ...state,
         currentPage: state.currentPage - 1,
-      };
-    }
-    case UPDATE_CACHED_PAGES: {
-      return {
-        ...state,
-        totalFetchedPages: state.totalFetchedPages + MAX_CACHED_PAGES,
-      };
-    }
-    case SHOW_CARD_DETAILS: {
-      return {
-        ...state,
-        cardDetails: action,
-      };
-    }
-    case EMPTY_CARD_DETAILS: {
-      return {
-        ...state,
-        cardDetails: {},
       };
     }
     default:

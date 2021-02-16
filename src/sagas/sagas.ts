@@ -1,17 +1,25 @@
-import { all, call, put, select } from "redux-saga/effects";
+import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   FETCH_DATA,
+  FETCH_DATA_REQUESTED,
   INITIAL_CACHED_PAGES,
   MAX_CACHED_PAGES,
+  MOVE_NEXT_PAGE,
+  NEXT_PAGE_REQUESTED,
   PAGE_SIZE,
   TOTAL_BACKEND_CARDS,
+  UPDATE_TOTAL_FETCHED_PAGES,
 } from "../constants";
 import { fetchData } from "../services";
 
-function* getApiData() {
+
+function* getApiDataAsync() {
   try {
-    // initialize a variable to make API call
+    // create a variable to make API call
     let numbersToFetch = 0;
+
+    // create a variable to record total fetched pages
+    let totalFetchedPages = 0;
 
     /* Initial Cache:
        (INITIAL_CACHED_PAGES + first page) * PAGE_SIZE  
@@ -24,11 +32,12 @@ function* getApiData() {
 
     const state: ReturnType<any> = yield select();
 
-    if (state.data.currentPage === 0) {
-      numbersToFetch = (INITIAL_CACHED_PAGES + 1) * PAGE_SIZE;
+    if (state.data.currentPage === 1) {
+      totalFetchedPages = INITIAL_CACHED_PAGES + 1;
+      numbersToFetch = totalFetchedPages * PAGE_SIZE;
     } else {
-      numbersToFetch =
-        (state.data.totalFetchedPages + MAX_CACHED_PAGES) * PAGE_SIZE;
+      totalFetchedPages = state.data.totalFetchedPages + MAX_CACHED_PAGES;
+      numbersToFetch = totalFetchedPages * PAGE_SIZE;
     }
 
     // make API call to fetch data
@@ -53,6 +62,33 @@ function* getApiData() {
   }
 }
 
+function* onNextPageAsync() {
+  // Update pagination to store
+  yield put({ type: MOVE_NEXT_PAGE });
+
+  const state: ReturnType<any> = yield select();
+
+  const { currentPage, totalFetchedPages } = state.data;
+
+  // if current page that user visits equals the total number of fetched pages
+  // then make api call to fetch more data and update total number of fetched pages
+  if (currentPage === totalFetchedPages) {
+    yield getApiDataAsync();
+
+    yield put({ type: UPDATE_TOTAL_FETCHED_PAGES });
+  }
+}
+
+// Watch for firing API Call
+function* watchAPIRequest() {
+  yield takeLatest(FETCH_DATA_REQUESTED, getApiDataAsync);
+}
+
+// Watch for user clicking 'Next Page' button
+function* watchOnNextPageAsync() {
+  yield takeEvery(NEXT_PAGE_REQUESTED, onNextPageAsync);
+}
+
 export default function* rootSaga() {
-  yield all([getApiData()]);
+  yield all([watchAPIRequest(), watchOnNextPageAsync()]);
 }

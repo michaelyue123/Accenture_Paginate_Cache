@@ -14,7 +14,7 @@ const InitialLoading: React.FC = () => {
         style={{ minHeight: "100vh" }}
       >
         <CircularProgress size={100} />
-        <h1>Loading, please wait</h1>
+        <h1>Loading... Please Wait</h1>
       </Grid>
     </div>
   );

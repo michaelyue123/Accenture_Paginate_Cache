@@ -2,61 +2,73 @@ import {
   BACK_PREVIOUS_PAGE,
   FETCH_DATA,
   MOVE_NEXT_PAGE,
-  UPDATE_CACHED_PAGES,
   FetchDataAction,
   PaginateActionTypes,
-  UpdateCachedPagesAction,
-  ShowCardDetailsAction,
-  SHOW_CARD_DETAILS,
-  EmptyCardDetailsAction,
-  EMPTY_CARD_DETAILS,
-  GetTotalCardsAction,
-  TOTAL_BACKEND_CARDS,
+  UpdateTotalFetchedPagesAction,
+  UPDATE_TOTAL_FETCHED_PAGES,
+  FETCH_DATA_REQUESTED,
+  RequestNextPageAction,
+  NEXT_PAGE_REQUESTED,
+  GET_INITIAL_FETCHED_PAGES,
 } from "../constants";
 
 // fetch data action
-export const fetchData = (data: []): FetchDataAction => {
+const fetchData = (data: []): FetchDataAction => {
   return {
     type: FETCH_DATA,
     payload: data,
   };
 };
 
-export const getTotalCards = (
-  totalBackendCards: number
-): GetTotalCardsAction => {
+// fetch data request
+const fetchDataRequest = () => {
   return {
-    type: TOTAL_BACKEND_CARDS,
-    payload: totalBackendCards,
-  };
-};
+    type: FETCH_DATA_REQUESTED
+  }
+}
 
-export const moveNextPage = (): PaginateActionTypes => {
+// get initial fetched page action
+const getInitialFetchedPages = () => {
+  return {
+    type: GET_INITIAL_FETCHED_PAGES,
+  }
+}
+
+// update total number of fetched pages action
+const updateTotalFetchedPages = (fetchedPages: number): UpdateTotalFetchedPagesAction => {
+  return {
+    type: UPDATE_TOTAL_FETCHED_PAGES,
+    payload: fetchedPages
+  }
+}
+
+// move to next page action
+const moveNextPage = (): PaginateActionTypes => {
   return {
     type: MOVE_NEXT_PAGE,
   };
 };
 
-export const backPreviousPage = (): PaginateActionTypes => {
+// move to next page action
+const requestNextPage = (): RequestNextPageAction => {
+  return {
+    type: NEXT_PAGE_REQUESTED,
+  };
+};
+
+// back to previous page action
+const backPreviousPage = (): PaginateActionTypes => {
   return {
     type: BACK_PREVIOUS_PAGE,
   };
 };
 
-export const updateCachedPages = (): UpdateCachedPagesAction => {
-  return {
-    type: UPDATE_CACHED_PAGES,
-  };
-};
-
-export const ShowCardDetails = (): ShowCardDetailsAction => {
-  return {
-    type: SHOW_CARD_DETAILS,
-  };
-};
-
-export const EmptyCardDetails = (): EmptyCardDetailsAction => {
-  return {
-    type: EMPTY_CARD_DETAILS,
-  };
+export const applicationAction = {
+  fetchData,
+  getInitialFetchedPages,
+  fetchDataRequest,
+  updateTotalFetchedPages,
+  moveNextPage,
+  backPreviousPage,
+  requestNextPage
 };

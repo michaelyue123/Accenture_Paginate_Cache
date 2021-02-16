@@ -1,11 +1,20 @@
 // fetch data contant type
 export const FETCH_DATA = "FETCH_DATA";
 
+// inital fetched page number
+export const GET_INITIAL_FETCHED_PAGES = "GET_INITIAL_FETCHED_PAGES";
+
+// constant for watching fetch data request
+export const FETCH_DATA_REQUESTED = "FETCH_DATA_REQUESTED";
+
 // get total number of cards available from backend
 export const TOTAL_BACKEND_CARDS = "TOTAL_BACKEND_CARDS";
 
-// request next page constant type
-export const REQUEST_NEXT_PAGE = "REQUEST_NEXT_PAGE";
+// update total fetched pages 
+export const UPDATE_TOTAL_FETCHED_PAGES = "UPDATE_TOTAL_FETCHED_PAGES";
+
+// constant for watching moving to next page request 
+export const NEXT_PAGE_REQUESTED = "NEXT_PAGE_REQUESTED";
 
 // move to next page constant type
 export const MOVE_NEXT_PAGE = "MOVE_NEXT_PAGE";
@@ -13,23 +22,29 @@ export const MOVE_NEXT_PAGE = "MOVE_NEXT_PAGE";
 // back to previous page constant type
 export const BACK_PREVIOUS_PAGE = "BACK_PREVIOUS_PAGE";
 
-// update cache pages constant type
-export const UPDATE_CACHED_PAGES = "UPDATE_CACHED_PAGES";
-
-// show single card details
-export const SHOW_CARD_DETAILS = "SHOW_CARD_DETAILS";
-
-// empty card details after clicking close button
-export const EMPTY_CARD_DETAILS = "EMPTY_CARD_DETAILS";
 
 export interface FetchDataAction {
   type: typeof FETCH_DATA;
   payload: {};
 }
 
+export interface GetInitialFetchedPagesAction {
+  type: typeof GET_INITIAL_FETCHED_PAGES;
+  payload: number
+}
+
+export interface UpdateTotalFetchedPagesAction {
+  type: typeof UPDATE_TOTAL_FETCHED_PAGES;
+  payload: number
+}
+
 export interface GetTotalCardsAction {
   type: typeof TOTAL_BACKEND_CARDS;
   payload: number;
+}
+
+export interface RequestNextPageAction {
+  type: typeof NEXT_PAGE_REQUESTED;
 }
 
 interface MoveNextPageAction {
@@ -42,14 +57,3 @@ interface BackPreviousPageAction {
 
 export type PaginateActionTypes = MoveNextPageAction | BackPreviousPageAction;
 
-export interface UpdateCachedPagesAction {
-  type: typeof UPDATE_CACHED_PAGES;
-}
-
-export interface ShowCardDetailsAction {
-  type: typeof SHOW_CARD_DETAILS;
-}
-
-export interface EmptyCardDetailsAction {
-  type: typeof EMPTY_CARD_DETAILS;
-}

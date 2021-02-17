@@ -1,6 +1,6 @@
 # Paginate-Cache
-Application Demo Pages:
-![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example1.png)
+Application Demo Pages: <br><br>
+![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example1.png) <br><br>
 ![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example2.png)
 
 ## Table of Contents

@@ -17,7 +17,7 @@
 
 - clone the repo: `git clone https://github.com/michaelyue123/Accenture_Paginate_Cache.git`
 
-Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws 401 error. 
+Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws a 401 error. 
 
 Please run following **curl request** on your terminal or postman to fetch latest API token and update it inside `src/constants/system.constants.ts`. I really appreciate your attention. 
 
@@ -166,6 +166,6 @@ Total: 32.5hours.
 - TypeScript, the strict syntactical superset of JavaScript: <https://www.typescriptlang.org/>
 - React Hooks, add addtional features to functional components that let you use state and other React 	  	features without writing a class: <https://reactjs.org/docs/hooks-intro.html>
 
-## Improvement:
+## Improvements:
 
-- Situation where API call reaches the limit of backend available cards is not considered as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can calculate total cards remaining in the backend and only fetch the remaining cards from backend. 
+- Situation where API call reaches the limit of backend available cards is not considered at this stage as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can calculate total cards remaining in the backend and only fetch the remaining cards from backend. 

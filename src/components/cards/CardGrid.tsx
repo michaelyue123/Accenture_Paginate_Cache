@@ -7,7 +7,7 @@ import SingleCard from "./Card";
 
 const useStyles = makeStyles({
   root: {
-    padding: "5vw 10vw",
+    padding: "1.5vw 10vw",
   },
 });
 

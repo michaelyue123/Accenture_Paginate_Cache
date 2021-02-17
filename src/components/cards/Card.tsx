@@ -10,7 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    minWidth: 250,
     height: 230,
   },
   title: {
@@ -76,7 +76,7 @@ const SingleCard: React.FC<SingleCardProp> = ({ singleCardDetail }) => {
     setState({ ...state, [anchor]: open });
   };
 
-  // card drawer UI 
+  // card drawer UI
   const cardDrawer = (anchor: Anchor) => (
     <Grid
       container

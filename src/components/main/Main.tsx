@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CardGrid from "../cards/CardGrid";
-import InitialLoading from "../loading/initial_loading/InitialLoading";
+import InitialLoading from "../loading/InitialLoading";
 import Pagination from "../pagination/Pagination";
-import { PAGE_SIZE } from "../../constants";
-import UncachedLoading from "../loading/uncached_loading/UncachedLoading";
+import UncachedLoading from "../loading/UncachedLoading";
 import { applicationAction } from "../../actions";
+import { PAGE_SIZE } from "../../constants";
 
 const useStyles = makeStyles({
   root: {

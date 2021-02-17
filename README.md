@@ -1,22 +1,25 @@
-# [Paginate-Cache]
+# Paginate-Cache
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
-- [Flow Chart](#flow-chart)
-- [Implementation](#implementation)
+- [Application Flow Chart](#application-flow-chart)
+- [Design Logic and Implementation](#design-logic-and-implementation)
+- [Unit Test](#unit-test)
 - [File Structure](#file-structure)
-- [Time Distribution](#time-distribution)
-- [Responsive Layout](#responsive-layout)
+- [Time Allocation](#time-allocation)
 - [Resources](#resources)
 - [Reporting Issues](#reporting-issues)
-- [Licensing](#licensing)
-- [Contact Me](#contact-me)
 
 ## Quick start
 
-- [Download from Github](https://github.com/JoeyDon/Accenture-Paginate-Cache/archive/master.zip) or clone the repo:
-  `git clone https://github.com/devias-io/react-material-dashboard.git`
+- [Download from Github](https://github.com/michaelyue123/Accenture_Paginate_Cache/archive/main.zip) or clone the repo:
+  `git clone https://github.com/michaelyue123/Accenture_Paginate_Cache.git`
+
+Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws 401 error. Please run following curl request on your terminal to fetch latest API token and update it the old one inside folder `src/constants/system.constants.ts`. I really appreciate your attention. 
+
+curl request: `curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true" -H "accept: */*" -H "Content-Type: application/json" -d "{\"username\":\"candidate_test1\",\"password\":\"candidate_test1\",\"snowEnabled\":true}"`
+
 
 - Install dependencies:
   `npm install` or `yarn`
@@ -24,154 +27,135 @@
 - Start the server:
   `npm start` or `yarn start`
 
-- Run the test: ( Jest with Enzyme)
-  `npm test` or `yarn test`
+- Run the test:
+  `npm run test` or `yarn test`
 
-- Build the package:
+- Create a production build:
   `npm run build` or `yarn build`
 
 - Views are on(default):
   `localhost:3000`
 
-## Flow Chart
+## Application Flow Chart
 
-![Flow Chart](https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/WorkflowDiagram/Flowchart.png?raw=true)
+![Application Flow Chart](https://github.com/michaelyue123/Accenture_Paginate_Cache/main/images/project_design.png)
 
-## Implementation
+## Design Logic and Implementation
 
-src/settings/setting.js
-`const PAGE_SIZE = 12;`
-`const MAX_CACHE_PAGES = 8;`
-`const INITIAL_CACHE_PAGES = 4;`
+`PAGE_SIZE = 12;`
+`MAX_CACHED_PAGES = 8;`
+`INITIAL_CACHED_PAGES = 4;`
 
-1. `Home.componentDidMount()` initially will load 60 cards which displayed in 5 pages. This is calculated by `PAGE_SIZE \* (INITIAL_CACHE_PAGES + 1)
-   \*\* A circular loading sign will appear in the middle of the screen while data being fetched.
+1.  During initial loading, a circular loading sign will appear in the middle of the screen. `useEffect()` will be called inside `Main Component` to render first page and cache extra 4 pages ahead. In total, 60 cards are fetched from backend and these cards are displayed in 5 pages. Each page shows 12 cards. This is calculated by `(INITIAL_CACHED_PAGES + 1)\* PAGE_SIZE.
 
-2. `Saga` will listen to the `onNextPage()` in `Action`, if the current page index reach the end of cached index, then pull more data from the API. e.g.`(paginationReducer === cacheReducer) && getMoreData()`
-   \*\* User will see a linear loading indication on the top showing fetching more data in the backend.
+2.  Meanwhile, `Redux Saga` will listen to the action `fetchDataRequest()` dispatched from `Main Component` and fire API call. Additionally, `Redux Saga` will also listen closely to `requestNextPage()` action that gets dispatched once user clicks "NEXT" button. If current page number equals to total number of fetched pages, which means that user has reached the last page of total fetched pages, `Redux Saga` will fire a new API call to cache 8 more pages. If user clicks too fast and data has not been loaded, user will see a linear loading indication on the top of the screen showing "Click too quick, please wait for more cards to load.".
 
-3. In REAL WORLD application, I will prefer implement it `(paginationReducer === cacheReducer -2) && getMoreData()`in `Saga.js`. This will cause more frequent API calls, but offer a smoother User Experience. User will see less loading because we cache 2 pages ahead before reaching the end of cache.
-   Since `Minimising the number of requests to the backend` is one of the `Judging Criteria`, then I sacrificed a bit of UX. User might see more loading, but this implementation does the minimal API requests.
+## Unit Test
+
+In addtion to standard `Jest` and `Enzyme` libraries, `@types/jest`, `@types/enzyme` and `@types/enzyme-adapter-react-16` are intalled to configure unit tests with TypeScript.
+
+- `cd [project folder]`
+- `npm run test` or `yarn test`
+
+click `a` to re-run all test cases
+
+Test cases are listed below. <br>
+![](https://github.com/michaelyue123/Accenture_Paginate_Cache/main/images/test_cases.png)
 
 ## File Structure
-
-Within the download you'll find the following directories and files:
 
 ```
 Accenture-Paginate-Cache
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-├── package-lock.json
+├── tsconfig.json
 ├── yarn.lock
 ├── README.md
 ├── public
 └── src
+	├── actions
+	│	├── actions.ts
+	│	└── index.ts
 	├── components
 	│	├── cards
 	│	│	├── Card.tsx
-	│	│	└── Home.jsx
-	│	├── home
-	│	│	├── Home.test.js
-	│	│	└── Home.jsx
+	│	│	├── Card.test.tsx
+	│	│	├── CardGrid.tsx
+	│	│	└── CardGrid.test.tsx
 	│	├── loading
-	│	│	├── LoadingCircle.jsx
-	│	│	└── LoadingLinear.jsx
+	│	│	├── InitialLoading.tsx
+	│	│	├── InitialLoading.test.tsx
+	│	│	├── UncachedLoading.tsx
+	│	│	└── UncachedLoading.test.tsx
 	│	├── pagination
-	│	│	└── Pagination.jsx
-	│	├── App.test.js
-	│	└── App.jsx
+	│	│	├── Pagination.tsx
+	│	│	└── Pagination.test.jsx
+	│	├── main
+	│	│	└── Main.tsx
+	│	├── App.test.tsx
+	│	└── App.tsx
 	├── reducers
-	│	├── cacheReducer.js
-	│	├── dataReducer.js
-	│	├── index.js
-	│	├── lastpageReducer.js
-	│	└── paginationReducer.js
-	├── settings
-	│	└── settings.js
-	├── utils
-	│	├── testUtils.js
-	│	└── paginate.js
-	├── action.js
-	├── api.js
-	├── index.js
-	├── registerServiceWorker.js
-	├── saga.js
-	└── store.js
+	│	├── application.reducer.ts
+	│	└── index.ts
+	├── sagas
+	│	├── sagas.ts
+	│	└── index.ts
+	├── services
+	│	├── fetchData.service.ts
+	│	└── index.ts
+	├── store
+	│	├── configureStore.ts
+	│	└── index.ts
+	├── setupTests.ts
+	├── testUtils.ts
+	└── index.js
 ```
 
-## Time Distribution
+## Time Allocation
 
 Total: 30hours.
 
 1. `Setup: 3 hours`
 
 - Git repo
-- ` React + Redux + Saga, and all dependencies`
-- ` Enzyme , Enzyme-adapter-react-16, Jest-enzyme`
+- ` Install React + Redux + Saga, and all dependencies`
+- ` Install Enzyme + Enzyme-adapter-react-16 + Jest-enzyme for JavaScript and TypeScript`
 - ` Postman API test`
 
-2. `Structure Planing: 6 hours`
+2. `TypeScript: 3 hours`
 
-- Design the components tree
-- Design Redux data flow
-- Design fetching cache pattern
-- Draw diagram
+- Re-visit the syntax of TypeScript
+- practice TypeScript by building a simple todo list
 
-3. `Implementing: 12 hours`
+3. `Structure Planing: 10 hours`
+
+- set up project structure
+- figure out the logic behind instant paginate cache
+- draw application design diagram
+
+4. `Implementation: 12 hours`
 
 - Implementing Components, Redux, Action, Saga
 - Implementing fetching algorithsm
-- Testings
 
-4. `CSS Stylying (Responsive): 3 hours`
+5. `CSS styling: 0.5 hours`
 
-- Responsive to different size of screen
-- Mock the UI similar to the picture in instruction.
+- Responsive to small, medium and large screen on 15-inch macBook Pro
 
-5. `Learn Testings and Implement the basics: 3 hours`
+6. `Implement test case: 3 hours`
+- Re-visit the concepts of Jest and Enzyme for JavaScript and apply it to TypeScript
+- implement test cases
 
-- A better understanding of Unit tests, Integration tests, End to end test.
-- New mindset : Test Driven Development
-- Implement basic testing
+7. `README.md: 1 hour`
 
-5. `README.md: 3 hours`
-
-- Formatted as much concise as possible
-
-## Responsive Layout
-
-1920 x 1080 (16:9)
-21.5'' monitor / 23'' monitor / 1080p TV
-![Resolution 1920 x 1080](https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/responsiveExample/1920.1080.PNG?raw=true)
-
-1366 x 768 (16:9)
-14'' Notebook / 15.6'' Laptop / 18.5'' monitor
-![Resolution 1366 x 768](https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/responsiveExample/1366.768.PNG?raw=true)
-
-768 x 1024 (3:4)
-IPAD / Tablet
-![Resolution IPAD](https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/responsiveExample/IPAD.PNG?raw=true)
-
-375 x 667 (9:19)
-IPHONE 6/7/8 or Similar mobile phones
-![Resolution 1366 x 768](https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/responsiveExample/IPHONE%20678.PNG?raw=true)
 
 ## Resources
 
 - Material-UI, the world's most popular React UI framework. : <https://material-ui.com/>
-- Udamy, Test Driven Development course on [React Testing with Jest and Enzyme](https://www.udemy.com/gift/react-testing-with-jest-and-enzyme/?couponCode=LEARNTODAY) to follow the best practices of testing.
-- Docker, Container Platform : [Learn more](https://www.docker.com/)
+- TypeScript, the strict syntactical superset of JavaScript: <https://www.typescriptlang.org/>
+- React Hooks, add addtional features to functional components that let you use state and other React 	  	features without writing a class: <https://reactjs.org/docs/hooks-intro.html>
 
-## Reporting Issues:
+## Improvement:
 
-- [Github Issues Page](https://github.com/devias-io/react-material-dashboard/issues?ref=devias-io)
-
-## Design Files
-
-- Licensed under MIT ([https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/LICENSE.md](https://github.com/JoeyDon/Accenture-Paginate-Cache/blob/master/LICENSE.md))
-
-## Contact Me
-
-- Email me: Joey.don0905@gmail.com
-- [Check me out on Linkedin](https://www.linkedin.com/in/joey-dong-032b9013a/)
+- Situation where API call reaches the limit of backend available cards is not considered as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can calculate total cards remaining in the backend and only fetch the remaining cards from backend. 

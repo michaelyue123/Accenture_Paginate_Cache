@@ -95,6 +95,6 @@ function* watchOnNextPageAsync() {
   yield takeEvery(NEXT_PAGE_REQUESTED, onNextPageAsync);
 }
 
-export default function* rootSaga() {
+export function* rootSaga() {
   yield all([watchFetchDataRequest(), watchOnNextPageAsync()]);
 }

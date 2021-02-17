@@ -31,16 +31,16 @@ A postman example is shown below <br><br>
 
 
 - Install dependencies:
-  `npm install` or `yarn`
+  `yarn`
 
 - Start the server:
-  `npm start` or `yarn start`
+  `yarn start`
 
 - Run the test:
-  `npm run test` or `yarn test`
+  `yarn test`
 
 - Create a production build:
-  `npm run build` or `yarn build`
+  `yarn build`
 
 - Views are on(default):
   `localhost:3000`
@@ -64,7 +64,7 @@ A postman example is shown below <br><br>
 In addtion to standard `Jest` and `Enzyme` libraries, `@types/jest`, `@types/enzyme` and `@types/enzyme-adapter-react-16` are intalled to configure unit tests with TypeScript.
 
 - `cd [project folder]`
-- `npm run test` or `yarn test`
+- `yarn test`
 
 click `a` to re-run all test cases
 

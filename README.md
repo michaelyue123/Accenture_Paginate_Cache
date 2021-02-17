@@ -60,7 +60,7 @@ A postman example is shown below <br><br>
 `MAX_CACHED_PAGES = 8`
 `INITIAL_CACHED_PAGES = 4`
 
-1.  During initial loading, a circular loading sign will appear in the middle of the screen. `useEffect()` will be called inside `Main Component` to render first page and cache extra 4 pages ahead. In total, 60 cards are fetched from backend and these cards are displayed in 5 pages. Each page shows 12 cards. This is calculated by `(INITIAL_CACHED_PAGES + 1)\* PAGE_SIZE`.
+1.  During initial loading, a circular loading sign will appear in the middle of the screen. `useEffect()` will be called inside `Main Component` to render first page and cache extra 4 pages ahead. In total, 60 cards are fetched from backend and these cards are displayed in 5 pages. Each page shows 12 cards. This is calculated by `(INITIAL_CACHED_PAGES + 1) * PAGE_SIZE`.
 
 2.  Meanwhile, `Redux Saga` will listen to the action `fetchDataRequest()` dispatched from `Main Component` and fire API call. Additionally, `Redux Saga` will also listen closely to `requestNextPage()` action that gets dispatched once user clicks "NEXT" button. If current page number equals to total number of fetched pages, which means that user has reached the last page of total fetched pages, `Redux Saga` will fire a new API call to cache 8 more pages. If user clicks too fast and data has not been loaded, user will see a linear loading indication on the top of the screen showing "Click too quick, please wait for more cards to load.".
 

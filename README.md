@@ -111,6 +111,10 @@ Accenture-Paginate-Cache
 	│	│	└── Main.tsx
 	│	├── App.test.tsx
 	│	└── App.tsx
+	├── constants
+	│	├── action.constants.ts
+	│	├── system.constants.ts
+	│	└── index.ts
 	├── reducers
 	│	├── application.reducer.ts
 	│	└── index.ts

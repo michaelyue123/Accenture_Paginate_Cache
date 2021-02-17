@@ -9,7 +9,7 @@
 - [File Structure](#file-structure)
 - [Time Allocation](#time-allocation)
 - [Resources](#resources)
-- [Reporting Issues](#reporting-issues)
+- [Improvements](#improvements)
 
 ## Quick start
 

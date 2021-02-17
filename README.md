@@ -68,7 +68,7 @@ In addtion to standard `Jest` and `Enzyme` libraries, `@types/jest`, `@types/enz
 
 click `a` to re-run all test cases
 
-Test cases are listed below. <br>
+Test cases are listed below. <br><br>
 ![Unit Test](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/test_cases.png)
 
 

@@ -126,7 +126,7 @@ Accenture-Paginate-Cache
 
 ## Time Allocation
 
-Total: 32.5 hours.
+Total: 34 hours.
 
 1. `Setup: 3 hours`
 
@@ -160,7 +160,7 @@ Total: 32.5 hours.
 - Re-visit the concepts of Jest and Enzyme for JavaScript and apply it to TypeScript
 - Implement test cases
 
-7. `README.md: 1 hour`
+7. `README.md: 2.5 hour`
 
 
 ## Resources

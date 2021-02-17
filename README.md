@@ -15,7 +15,7 @@
 
 - [Download from Github](https://github.com/michaelyue123/Accenture_Paginate_Cache/archive/main.zip) or clone the repo: `git clone https://github.com/michaelyue123/Accenture_Paginate_Cache.git`
 
-Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws 401 error. Please run following **curl request** on your terminal to fetch latest API token and update it the old one inside folder `src/constants/system.constants.ts`. I really appreciate your attention. 
+Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws 401 error. Please run following **curl request** on your terminal to fetch latest API token and update it inside folder `src/constants/system.constants.ts`. I really appreciate your attention. 
 
 ```bash
 curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true" -H "accept: */*" -H "Content-Type: application/json" -d "{\"username\":\"candidate_test1\",\"password\":\"candidate_test1\",\"snowEnabled\":true}"
@@ -115,7 +115,7 @@ Accenture-Paginate-Cache
 
 ## Time Allocation
 
-Total: 30hours.
+Total: 32.5hours.
 
 1. `Setup: 3 hours`
 

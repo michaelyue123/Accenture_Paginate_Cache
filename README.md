@@ -13,12 +13,12 @@
 
 ## Quick start
 
-- [Download from Github](https://github.com/michaelyue123/Accenture_Paginate_Cache/archive/main.zip) or clone the repo:
-  `git clone https://github.com/michaelyue123/Accenture_Paginate_Cache.git`
+- [Download from Github](https://github.com/michaelyue123/Accenture_Paginate_Cache/archive/main.zip) or clone the repo: `git clone https://github.com/michaelyue123/Accenture_Paginate_Cache.git`
 
 Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws 401 error. Please run following curl request on your terminal to fetch latest API token and update it the old one inside folder `src/constants/system.constants.ts`. I really appreciate your attention. 
 
-curl request: `curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true" -H "accept: */*" -H "Content-Type: application/json" -d "{\"username\":\"candidate_test1\",\"password\":\"candidate_test1\",\"snowEnabled\":true}"`
+curl request: <br>
+`curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true" -H "accept: */*" -H "Content-Type: application/json" -d "{\"username\":\"candidate_test1\",\"password\":\"candidate_test1\",\"snowEnabled\":true}"`
 
 
 - Install dependencies:
@@ -42,11 +42,11 @@ curl request: `curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.
 
 ## Design Logic and Implementation
 
-`PAGE_SIZE = 12;`
-`MAX_CACHED_PAGES = 8;`
-`INITIAL_CACHED_PAGES = 4;`
+`PAGE_SIZE = 12`
+`MAX_CACHED_PAGES = 8`
+`INITIAL_CACHED_PAGES = 4`
 
-1.  During initial loading, a circular loading sign will appear in the middle of the screen. `useEffect()` will be called inside `Main Component` to render first page and cache extra 4 pages ahead. In total, 60 cards are fetched from backend and these cards are displayed in 5 pages. Each page shows 12 cards. This is calculated by `(INITIAL_CACHED_PAGES + 1)\* PAGE_SIZE.
+1.  During initial loading, a circular loading sign will appear in the middle of the screen. `useEffect()` will be called inside `Main Component` to render first page and cache extra 4 pages ahead. In total, 60 cards are fetched from backend and these cards are displayed in 5 pages. Each page shows 12 cards. This is calculated by `(INITIAL_CACHED_PAGES + 1)\* PAGE_SIZE`.
 
 2.  Meanwhile, `Redux Saga` will listen to the action `fetchDataRequest()` dispatched from `Main Component` and fire API call. Additionally, `Redux Saga` will also listen closely to `requestNextPage()` action that gets dispatched once user clicks "NEXT" button. If current page number equals to total number of fetched pages, which means that user has reached the last page of total fetched pages, `Redux Saga` will fire a new API call to cache 8 more pages. If user clicks too fast and data has not been loaded, user will see a linear loading indication on the top of the screen showing "Click too quick, please wait for more cards to load.".
 
@@ -60,7 +60,8 @@ In addtion to standard `Jest` and `Enzyme` libraries, `@types/jest`, `@types/enz
 click `a` to re-run all test cases
 
 Test cases are listed below. <br>
-![](https://github.com/michaelyue123/Accenture_Paginate_Cache/main/images/test_cases.png)
+![Unit Test](https://github.com/michaelyue123/Accenture_Paginate_Cache/main/images/test_cases.png)
+
 
 ## File Structure
 

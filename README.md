@@ -158,7 +158,7 @@ Total: 34 hours.
 
 - Use proxy as a work around to fix CORS issue
 - Implementing Components, Redux, Action, Saga
-- Implementing fetching algorithsm
+- Implementing fetching algorithms
 
 5. `CSS styling: 0.5 hours`
 

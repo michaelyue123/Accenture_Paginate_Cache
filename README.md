@@ -130,7 +130,7 @@ Total: 32.5hours.
 
 - Git repo
 - ` Install React + Redux + Saga, and all dependencies`
-- ` Install Enzyme + Enzyme-adapter-react-16 + Jest-enzyme for JavaScript and TypeScript`
+- ` Install Enzyme + Enzyme-adapter-react-16 + Jest-enzyme for TypeScript`
 - ` Postman API test`
 
 2. `TypeScript: 3 hours`

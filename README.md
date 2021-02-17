@@ -72,7 +72,7 @@ Test cases are listed below. <br><br>
 ![Unit Test](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/test_cases.png)
 
 
-## File Structure
+## Project Structure
 
 ```
 Accenture-Paginate-Cache

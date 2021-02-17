@@ -1,4 +1,5 @@
 # Paginate-Cache
+
 Application Demo Pages: <br><br>
 ![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example1.png) <br><br>
 ![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example2.png)
@@ -16,17 +17,18 @@ Application Demo Pages: <br><br>
 
 ## Quick start
 
-- [Download from Github](https://github.com/michaelyue123/Accenture_Paginate_Cache/archive/main.zip) 
+- [Download from Github](https://github.com/michaelyue123/Accenture_Paginate_Cache/archive/main.zip)
 
 - clone the repo: `git clone https://github.com/michaelyue123/Accenture_Paginate_Cache.git`
 
-Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws a 401 error. 
+Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws a 401 error.
 
-You can run following **curl request** on your terminal or postman to fetch latest API token and update it inside `src/constants/system.constants.ts`. Much appreciated. 
+You can run following **curl request** on your terminal or postman to fetch latest API token and update it inside `src/constants/system.constants.ts`. Much appreciated.
 
 ```bash
 curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true" -H "accept: */*" -H "Content-Type: application/json" -d "{\"username\":\"candidate_test1\",\"password\":\"candidate_test1\",\"snowEnabled\":true}"
 ```
+
 <br>
 
 A postman example is shown below <br><br>
@@ -75,7 +77,6 @@ click `a` to re-run all test cases
 
 Test cases are listed below. <br><br>
 ![Unit Test](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/test_cases.png)
-
 
 ## Project Structure
 
@@ -160,18 +161,18 @@ Total: 34 hours.
 - Responsive to small, medium and large screen on 15-inch MacBook Pro
 
 6. `Unit test: 3 hours`
+
 - Re-visit the concepts of Jest and Enzyme for JavaScript and apply it to TypeScript
 - Implement test cases
 
 7. `README.md: 2.5 hour`
 
-
 ## Resources
 
 - Material-UI, the world's most popular React UI framework. : <https://material-ui.com/>
 - TypeScript, the strict syntactical superset of JavaScript: <https://www.typescriptlang.org/>
-- React Hooks, add addtional features to functional components that let you use state and other React 	  	features without writing a class: <https://reactjs.org/docs/hooks-intro.html>
+- React Hooks, add addtional features to functional components that let you use state and other React features without writing a class: <https://reactjs.org/docs/hooks-intro.html>
 
 ## Improvements:
 
-- Situation where API call reaches the limit of backend available cards is not considered at this stage as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can add a special case to calculate total cards remaining in the backend and only fetch the remaining cards from backend. 
+- Situation where API call reaches the limit of backend available cards is not considered at this stage as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can add a special case to calculate total cards remaining in the backend and only fetch the remaining cards from backend.

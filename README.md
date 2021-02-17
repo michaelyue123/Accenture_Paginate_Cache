@@ -29,6 +29,8 @@ curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway
 A postman example is shown below <br><br>
 ![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/postman_example.png)
 
+- navigate to project folder
+  `cd [project folder]`
 
 - Install dependencies:
   `yarn`

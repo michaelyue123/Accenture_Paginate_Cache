@@ -126,7 +126,7 @@ Accenture-Paginate-Cache
 
 ## Time Allocation
 
-Total: 32.5hours.
+Total: 32.5 hours.
 
 1. `Setup: 3 hours`
 

@@ -19,7 +19,7 @@
 
 Before start, there is one thing that needs your attention. API token used in this application is a **short token** that only lives for roughly 7 to 8 mins. In case it expires and application throws a 401 error. 
 
-Please run following **curl request** on your terminal or postman to fetch latest API token and update it inside `src/constants/system.constants.ts`. I really appreciate your attention. 
+You can run following **curl request** on your terminal or postman to fetch latest API token and update it inside `src/constants/system.constants.ts`. Much appreciated. 
 
 ```bash
 curl -X POST "https://dh-atrpackageinstalltest.atrmywizard-aiops.com/atr-gateway/identity-management/api/v1/auth/short-token?useDeflate=true" -H "accept: */*" -H "Content-Type: application/json" -d "{\"username\":\"candidate_test1\",\"password\":\"candidate_test1\",\"snowEnabled\":true}"

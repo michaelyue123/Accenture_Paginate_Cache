@@ -148,6 +148,7 @@ Total: 32.5hours.
 
 4. `Implementation: 12 hours`
 
+- Use proxy as a work around to fix CORS issue
 - Implementing Components, Redux, Action, Saga
 - Implementing fetching algorithsm
 

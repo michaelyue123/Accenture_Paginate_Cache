@@ -168,4 +168,4 @@ Total: 32.5hours.
 
 ## Improvements:
 
-- Situation where API call reaches the limit of backend available cards is not considered at this stage as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can calculate total cards remaining in the backend and only fetch the remaining cards from backend. 
+- Situation where API call reaches the limit of backend available cards is not considered at this stage as it takes a long time to reach the end. In case the number of backend cards is not enough to cache another 8 more pages for frontend, frontend can add a special case to calculate total cards remaining in the backend and only fetch the remaining cards from backend. 

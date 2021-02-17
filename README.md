@@ -138,13 +138,13 @@ Total: 34 hours.
 2. `TypeScript: 3 hours`
 
 - Re-visit the syntax of TypeScript
-- practice TypeScript by building a simple todo list
+- Practice TypeScript by building a simple todo list
 
 3. `Structure Planing: 10 hours`
 
-- set up project structure
-- figure out the logic behind instant paginate cache
-- draw application design diagram
+- Set up project structure
+- Figure out the logic behind instant paginate cache
+- Draw application design diagram
 
 4. `Implementation: 12 hours`
 

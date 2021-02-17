@@ -67,7 +67,7 @@ const Main: React.FC = () => {
       ) : (
         <>
           {fetchedData.length > (currentPage - 1) * PAGE_SIZE ? (
-            <React.Fragment data-test="main-component-display">
+            <React.Fragment>
               <CardGrid
                 singlePageData={paginate(fetchedData, currentPage, PAGE_SIZE)}
               />

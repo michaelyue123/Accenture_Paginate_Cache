@@ -156,9 +156,9 @@ Total: 32.5 hours.
 
 - Responsive to small, medium and large screen on 15-inch MacBook Pro
 
-6. `Implement test case: 3 hours`
+6. `Unit testing: 3 hours`
 - Re-visit the concepts of Jest and Enzyme for JavaScript and apply it to TypeScript
-- implement test cases
+- Implement test cases
 
 7. `README.md: 1 hour`
 

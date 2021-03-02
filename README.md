@@ -1,5 +1,8 @@
 # Paginate-Cache
 
+A simple React Application displays a paginated set of card data and allow users to change pages to see all available cards as well as check single card details. The page loads instantly when user clicks “NEXT” button.<br><br>
+
+
 Application Demo Pages: <br><br>
 ![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example1.png) <br><br>
 ![](https://github.com/michaelyue123/Accenture_Paginate_Cache/blob/main/images/running_example2.png)
